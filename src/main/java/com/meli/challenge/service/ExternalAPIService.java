@@ -7,8 +7,8 @@ package com.meli.challenge.service;
 
 import com.meli.challenge.dto.ResponseTraceDTO;
 import com.meli.challenge.dto.external.FixerDTO;
-import com.meli.challenge.dto.external.IpToCountryDTO;
 import com.meli.challenge.dto.external.CountryDTO;
+import com.meli.challenge.dto.external.IPInfoDTO;
 import com.meli.challenge.mapper.ResponseTraceMapper;
 
 import com.meli.challenge.utilities.ExternalAPI;
@@ -32,8 +32,8 @@ public class ExternalAPIService {
         return this.getRestTemplate().getForObject(ExternalAPI.RESTCOUNTRY_BASE_URL + countryCode, CountryDTO.class);
     }
 
-    public IpToCountryDTO getIp2Country(String ip) {
-        return this.getRestTemplate().getForObject(ExternalAPI.IP2COUNTRY_BASE_URL + ip, IpToCountryDTO.class);
+    public IPInfoDTO getIp2Country(String ip) {
+        return this.getRestTemplate().getForObject(ExternalAPI.IP2COUNTRY_BASE_URL + ip, IPInfoDTO.class);
     }
 
     public String getEuroRate(String currencyCode) {
@@ -46,7 +46,7 @@ public class ExternalAPIService {
     }
 
     public ResponseTraceDTO getDataFromIP(String ip) {
-        IpToCountryDTO ip2Country = this.getIp2Country(ip);
+        IPInfoDTO ip2Country = this.getIp2Country(ip);
         CountryDTO restCountry = this.getRestCountry(ip2Country.getCountryCode());
         restCountry.getCurrencies().forEach(currency -> {
             currency.setEuroRate(this.getEuroRate(currency.getCode()));
