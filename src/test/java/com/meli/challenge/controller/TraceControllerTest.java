@@ -5,61 +5,59 @@
  */
 package com.meli.challenge.controller;
 
-import com.meli.challenge.dto.TraceDTO;
-import com.meli.challenge.service.TraceService;
-import java.time.LocalDate;
+import com.meli.challenge.service.ExternalAPIService;
+import com.meli.challenge.service.StatsService;
+import com.meli.challenge.service.TraceServiceImpl;
 import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import com.meli.challenge.mapper.ResponseTraceMapper;
+import com.meli.challenge.mapper.DistanceMapper;
+import com.meli.challenge.service.DistanceServiceImpl;
 
 /**
  *
  * @author Ezequiel Cruz Avila <ezecruzavila@gmail.com>
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = TraceController.class)
+@WebMvcTest(TraceController.class)
 public class TraceControllerTest {
 
+    @Autowired
+    private MockMvc mvc;
+
     @MockBean
-    private TraceService traceService;
+    TraceServiceImpl traceService;
 
-    private TraceDTO mockDTO;
+    @MockBean
+    StatsService statsService;
 
-    @Before
-    public void setUp() {
-        mockDTO = new TraceDTO();
-        mockDTO.setIp("45.4.103.255");
-        mockDTO.setCountryName("Argentina");
-        mockDTO.setIsoCode("ARG");
-        mockDTO.setDate(LocalDate.now());
-        mockDTO.getLanguages().add("");
-    }
+    @MockBean
+    ExternalAPIService externalService;
 
-    /**
-     * Test of trace method, of class TraceController.
-     */
+    @MockBean
+    DistanceServiceImpl distanceServiceImpl;
+
+    @MockBean
+    ResponseTraceMapper responseTraceMapper;
+    
+    @MockBean
+    DistanceMapper distanceMapper;
+
     @Test
-    public void testTrace(){
-
-        ResponseEntity mockRes = ResponseEntity.ok(mockDTO);
-        Mockito.when(traceService.getTrace(Mockito.anyString())).thenReturn(mockRes);
-        assertEquals(traceService.getTrace("45.4.103.255"), mockRes);
+    public void stats_ProperRequest_httpStatus200() throws Exception {
+        mvc.perform(
+                get("/trace/stats"))
+                .andExpect(status().isOk());
     }
 
     public TraceControllerTest() {
-    }
-
-    /**
-     * Test of stats method, of class TraceController.
-     */
-    @Test
-    public void testStats() {
     }
 
 }

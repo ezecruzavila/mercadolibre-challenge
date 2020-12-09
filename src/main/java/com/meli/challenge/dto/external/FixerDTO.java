@@ -14,28 +14,8 @@ import java.util.HashMap;
  */
 public class FixerDTO implements Serializable{
     
-    private boolean success;
-    private String base;
+
     private HashMap<String, String> rates = new HashMap<>();
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-
-
-    public String getBase() {
-        return base;
-    }
-
-    public void setBase(String base) {
-        this.base = base;
-    }
-
 
     public HashMap<String, String> getRates() {
         return rates;

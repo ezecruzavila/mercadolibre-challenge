@@ -5,40 +5,60 @@
  */
 package com.meli.challenge.service;
 
+import com.meli.challenge.dto.ResponseTraceDTO;
 import com.meli.challenge.dto.external.FixerDTO;
 import com.meli.challenge.dto.external.IpToCountryDTO;
-import com.meli.challenge.dto.external.RestCountryDTO;
-import com.meli.challenge.service.base.BaseService;
+import com.meli.challenge.dto.external.CountryDTO;
+import com.meli.challenge.mapper.ResponseTraceMapper;
+
+import com.meli.challenge.utilities.ExternalAPI;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author Ezequiel Cruz Avila <ezecruzavila@gmail.com>
  */
-@Service("external-api")
-public class ExternalAPIService extends BaseService {
-    
-    private final String FIXER_ACCESS_KEY = "09ece863ff52bd32a5587f0083f38898";
+@Service("external")
+public class ExternalAPIService {
 
-    private final String IP2COUNTRY_BASE_URL = "https://api.ip2country.info";
+    private RestTemplate restTemplate = new RestTemplate();
 
-    private final String RESTCOUNTRY_BASE_URL = "https://restcountries.eu/rest";
+    @Autowired
+    ResponseTraceMapper mapper;
 
-    private final String FIXER_BASE_URL = "http://data.fixer.io/api/latest?access_key=";
-
-    public RestCountryDTO getRestCountry(String countryCode) {
-        return this.getRestTemplate().getForObject(this.RESTCOUNTRY_BASE_URL + "/v2/alpha/" + countryCode, RestCountryDTO.class);
+    public CountryDTO getRestCountry(String countryCode) {
+        return this.getRestTemplate().getForObject(ExternalAPI.RESTCOUNTRY_BASE_URL + countryCode, CountryDTO.class);
     }
 
     public IpToCountryDTO getIp2Country(String ip) {
-        return this.getRestTemplate().getForObject(this.IP2COUNTRY_BASE_URL + "/ip?" + ip, IpToCountryDTO.class);
+        return this.getRestTemplate().getForObject(ExternalAPI.IP2COUNTRY_BASE_URL + ip, IpToCountryDTO.class);
     }
 
     public String getEuroRate(String currencyCode) {
-        FixerDTO res = this.getRestTemplate().getForObject(this.FIXER_BASE_URL + this.FIXER_ACCESS_KEY, FixerDTO.class);
-        if (res.getRates().containsKey(currencyCode)) {
-            return res.getRates().get(currencyCode);
+        String rate = "";
+        FixerDTO res = this.getRestTemplate().getForObject(ExternalAPI.FIXER_BASE_URL + ExternalAPI.FIXER_ACCESS_KEY, FixerDTO.class);
+        if (res != null && res.getRates().containsKey(currencyCode)) {
+            rate = res.getRates().get(currencyCode);
         }
-        return null;
+        return rate;
+    }
+
+    public ResponseTraceDTO getDataFromIP(String ip) {
+        IpToCountryDTO ip2Country = this.getIp2Country(ip);
+        CountryDTO restCountry = this.getRestCountry(ip2Country.getCountryCode());
+        restCountry.getCurrencies().forEach(currency -> {
+            currency.setEuroRate(this.getEuroRate(currency.getCode()));
+        });
+        return mapper.toCompleteDTO(ip, restCountry);
+    }
+
+    public RestTemplate getRestTemplate() {
+        return restTemplate;
+    }
+
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 }

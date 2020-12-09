@@ -5,23 +5,33 @@
  */
 package com.meli.challenge.dto.external;
 
-import com.meli.challenge.dto.external.LanguageDTO;
-import com.meli.challenge.dto.external.CurrencyDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author Ezequiel Cruz Avila <ezecruzavila@gmail.com>
  */
-public class RestCountryDTO implements Serializable{
+public class CountryDTO implements Serializable{
     
     private String name;
-    private List<CurrencyDTO> currencies;
-    private List<LanguageDTO> languages;
-    private List<String> timezones;
-    private List<Double> latlng;
+    private String alpha2Code;
+    private List<CurrencyDTO> currencies = new ArrayList<>();
+    private List<LanguageDTO> languages = new ArrayList<>();
+    private List<String> timezones = new ArrayList<>();
+    private List<Double> latlng = new ArrayList<>();
 
+    public String getAlpha2Code() {
+        return alpha2Code;
+    }
+
+    public void setAlpha2Code(String alpha2Code) {
+        this.alpha2Code = alpha2Code;
+    }
+
+    
+    
     public List<Double> getLatlng() {
         return latlng;
     }

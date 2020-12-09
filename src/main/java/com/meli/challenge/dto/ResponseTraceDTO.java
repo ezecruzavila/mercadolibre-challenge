@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.meli.challenge.dto;
 
 import java.io.Serializable;
@@ -14,12 +9,12 @@ import java.util.List;
  *
  * @author Ezequiel Cruz Avila <ezecruzavila@gmail.com>
  */
-public class TraceDTO implements Serializable{
-    
+public class ResponseTraceDTO implements Serializable {
+
     private String ip;
     private String countryName;
-    private String isoCode;
-    private LocalDate date =  LocalDate.now();
+    private String countryCode;
+    private LocalDate date = LocalDate.now();
     private List<String> languages = new ArrayList();
     private List<String> currencies = new ArrayList();
     private List<String> times = new ArrayList();
@@ -33,16 +28,6 @@ public class TraceDTO implements Serializable{
         this.ip = ip;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-
-
     public String getCountryName() {
         return countryName;
     }
@@ -51,21 +36,20 @@ public class TraceDTO implements Serializable{
         this.countryName = countryName;
     }
 
-    public List<String> getCurrencies() {
-        return currencies;
+    public String getCountryCode() {
+        return countryCode;
     }
 
-    public void setCurrencies(List<String> currencies) {
-        this.currencies = currencies;
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
-
-    public String getIsoCode() {
-        return isoCode;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setIsoCode(String isoCode) {
-        this.isoCode = isoCode;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public List<String> getLanguages() {
@@ -76,6 +60,13 @@ public class TraceDTO implements Serializable{
         this.languages = languages;
     }
 
+    public List<String> getCurrencies() {
+        return currencies;
+    }
+
+    public void setCurrencies(List<String> currencies) {
+        this.currencies = currencies;
+    }
 
     public List<String> getTimes() {
         return times;
@@ -94,6 +85,5 @@ public class TraceDTO implements Serializable{
     }
     
     
-    
-    
+
 }

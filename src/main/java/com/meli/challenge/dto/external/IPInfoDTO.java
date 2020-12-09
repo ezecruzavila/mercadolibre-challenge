@@ -11,13 +11,12 @@ import java.io.Serializable;
  *
  * @author Ezequiel Cruz Avila <ezecruzavila@gmail.com>
  */
-public class IpToCountryDTO implements Serializable{
+public class IPInfoDTO implements Serializable{
 
     private String countryCode;
     private String countryCode3;
     private String countryName;
-    private String countryEmoji;
-
+    
     public String getCountryCode() {
         return countryCode;
     }
@@ -42,13 +41,5 @@ public class IpToCountryDTO implements Serializable{
         this.countryName = countryName;
     }
 
-    public String getCountryEmoji() {
-        return countryEmoji;
-    }
-
-    public void setCountryEmoji(String countryEmoji) {
-        this.countryEmoji = countryEmoji;
-    }
-    
     
 }
