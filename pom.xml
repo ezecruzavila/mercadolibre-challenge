@@ -111,6 +111,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>mercadolibreChallenge</finalName>
         <plugins>
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -140,6 +141,7 @@
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
+ 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
