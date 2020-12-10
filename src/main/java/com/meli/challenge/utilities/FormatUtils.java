@@ -9,7 +9,6 @@ import com.meli.challenge.dto.external.CurrencyDTO;
 import com.meli.challenge.dto.external.LanguageDTO;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;

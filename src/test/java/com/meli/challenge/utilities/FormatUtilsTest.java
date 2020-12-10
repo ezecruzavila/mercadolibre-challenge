@@ -8,7 +8,6 @@ package com.meli.challenge.utilities;
 import com.meli.challenge.dto.external.CurrencyDTO;
 import com.meli.challenge.dto.external.LanguageDTO;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import org.junit.Test;

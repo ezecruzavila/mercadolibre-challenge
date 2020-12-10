@@ -1,12 +1,10 @@
-package com.meli.challenge.integration;
+package com.meli.challenge.controller;
 
 import com.meli.challenge.ChallengeApplication;
-import com.meli.challenge.dto.RequestDTO;
 import com.meli.challenge.dto.ResponseStatsDTO;
 import com.meli.challenge.dto.ResponseTraceDTO;
 import com.meli.challenge.entity.DistanceEntity;
 import com.meli.challenge.entity.TraceEntity;
-import com.meli.challenge.repository.TraceRepository;
 import com.meli.challenge.service.DistanceServiceImpl;
 import com.meli.challenge.service.TraceServiceImpl;
 import com.meli.challenge.utilities.TestValues;
@@ -22,7 +20,6 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
