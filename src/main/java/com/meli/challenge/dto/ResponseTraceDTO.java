@@ -1,5 +1,7 @@
 package com.meli.challenge.dto;
 
+import com.meli.challenge.utilities.TestValues;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -11,14 +13,26 @@ import java.util.List;
  */
 public class ResponseTraceDTO implements Serializable {
 
+    @ApiModelProperty(notes = "IP sobre la que se hizo la peticion", example = TestValues.IP)
     private String ip;
+    @ApiModelProperty(notes = "Nombre del pais al que pertenece la IP", example = TestValues.COUNTRY_NAME)
     private String countryName;
+    @ApiModelProperty(notes = "Código ISO de 2 dígitos del pais", example = TestValues.COUNTRY_CODE_US)
     private String countryCode;
-    private LocalDate date = LocalDate.now();
+    @ApiModelProperty(notes = "Fecha en que se hizo la peticion")
+    private LocalDate date;
+    @ApiModelProperty(notes = "Idiomas que se hablan en el pais al que pertenece la IP", example = "English (en)")
     private List<String> languages = new ArrayList();
+    @ApiModelProperty(notes = "Monedas y cotizacion en euros del pais al que pertenece la IP", example = "USD (1USD = 0.826 EUR)")
     private List<String> currencies = new ArrayList();
+    @ApiModelProperty(notes = "Hora y zonas horarias del pais al que pertenece la IP", example = "23:54:12 (UTC-03:00)")
     private List<String> times = new ArrayList();
+    @ApiModelProperty(notes = "Distancia aproximada al pais al que pertenece la IP", example = "8701 km")
     private String estimatedDistance;
+
+    public ResponseTraceDTO() {
+        date = LocalDate.now();
+    }
 
     public String getIp() {
         return ip;
@@ -83,7 +97,5 @@ public class ResponseTraceDTO implements Serializable {
     public void setEstimatedDistance(String estimatedDistance) {
         this.estimatedDistance = estimatedDistance;
     }
-    
-    
 
 }

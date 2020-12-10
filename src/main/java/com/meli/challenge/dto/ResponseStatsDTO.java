@@ -5,16 +5,20 @@
  */
 package com.meli.challenge.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
  *
  * @author Ezequiel Cruz Avila <ezecruzavila@gmail.com>
  */
-public class ResponseStatsDTO implements Serializable{
-    
+public class ResponseStatsDTO implements Serializable {
+
+    @ApiModelProperty(notes = "Máxima distancia a la que se hizo una petición según IP", example = "10507 km")
     private String furthestDistanceCall = "0 km";
+    @ApiModelProperty(notes = "Mínima distancia a la que se hizo una petición según IP", example = "8701 km")
     private String closestDistanceCall = "0 km";
+    @ApiModelProperty(notes = "Distance promedio a la que se hizo una petición según IP", example = "9600 km")
     private String averageDistanceCall = "0 km";
 
     public String getFurthestDistanceCall() {
@@ -40,8 +44,5 @@ public class ResponseStatsDTO implements Serializable{
     public void setAverageDistanceCall(String averageDistanceCall) {
         this.averageDistanceCall = averageDistanceCall;
     }
-
-
-
 
 }

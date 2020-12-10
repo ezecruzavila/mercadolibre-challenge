@@ -1,17 +1,12 @@
 package com.meli.challenge;
 
-import com.meli.challenge.entity.DistanceEntity;
-import com.meli.challenge.entity.TraceEntity;
-import com.meli.challenge.service.DistanceServiceImpl;
-import com.meli.challenge.service.TraceServiceImpl;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class ChallengeApplication {
 
+    /*
         @Bean
         ApplicationRunner applicationRunner(TraceServiceImpl svc, DistanceServiceImpl distSvc){
             return args -> {
@@ -28,9 +23,9 @@ public class ChallengeApplication {
                 
             };
         }
-        
-	public static void main(String[] args) {
-		SpringApplication.run(ChallengeApplication.class, args);
-	}
+     */
+    public static void main(String[] args) {
+        SpringApplication.run(ChallengeApplication.class, args);
+    }
 
 }
